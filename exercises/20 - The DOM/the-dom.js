@@ -27,4 +27,19 @@ pic.classList.remove('cool'); // pic.classList.remove('open'); will remove the c
 
 pic.addEventListener('click', () => {
     pic.classList.toggle('round');
-})
+});
+
+pic.alt = 'Random pic';  //adding missing attributes to pic
+
+window.addEventListener('load', () => {
+    console.log(pic.naturalWidth);
+});
+
+// pic.setAttribute('alt', 'Yet Another Random Pic'); //Sets a new value to the alt tag
+// console.log(pic.getAttribute('alt')); //Will get the alt tag for the picture
+
+const custom = document.querySelector('.custom');
+console.log(custom.dataset); // .dataset will return an objest with all the data properties of the object (Data-name for example)
+custom.addEventListener('click', () => {
+    alert(`Welcome ${custom.dataset.name}!`); //Will return the value of data-name into a string = "Welcome first!"
+});

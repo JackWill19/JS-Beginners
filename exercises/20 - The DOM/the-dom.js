@@ -14,7 +14,17 @@
 // console.log(heading.innerHTML);
 // console.log(heading.outerHTML);
 
-const pizzaList = document.querySelector('.pizza');
-// pizzaList.textContent = `${pizzaList.textContent} 17!`;
-pizzaList.insertAdjacentText('beforeend', '17!'); //Easiest way to add text to existing text
-console.log(pizzaList);
+// const pizzaList = document.querySelector('.pizza');
+// // pizzaList.textContent = `${pizzaList.textContent} 17!`;
+// pizzaList.insertAdjacentText('beforeend', '17!'); //Easiest way to add text to existing text
+// console.log(pizzaList);
+
+//Classes
+const pic = document.querySelector('.nice');
+pic.classList.add('open'); // pic.classList.add('open') will add an open class to the opject
+pic.classList.remove('cool'); // pic.classList.remove('open'); will remove the cool class
+
+
+pic.addEventListener('click', () => {
+    pic.classList.toggle('round');
+})

@@ -119,16 +119,60 @@
     */
 
     // find the first rating that talks about a burger with find()
+    
+    // function findBurgRating(singleFeedback) {
+    //   return singleFeedback.comment.includes('burg');
+    // }
+
+    function findByWord(word) {
+      return function(singleFeedback) {
+        return singleFeedback.comment.includes(word);
+      }
+    };
+
+    const burgRating = feedback.find(findByWord('burg'));
+
     // find all ratings that are above 2 with filter()
+    function filterByMinRating(minRating) {
+      return function(singleFeedback) {
+        return singleFeedback.rating > minRating
+      }
+    }
+
+    const goodReviews = feedback.filter(filterByMinRating(4));
+    console.log(goodReviews);
+
     // find all ratings that talk about a burger with filter()
+    const burgRatings = feedback.filter(singleFeedback => singleFeedback.comment.includes('burg'));
+    console.timeEnd('object');
+
     // Remove the one star rating however you like!
+    const legitRatings = feedback.filter(single => single.rating !== 1);
+    console.table(legitRatings);
 
     // check if there is at least 5 of one type of meat with some()
-    // make sure we have at least 3 of every meat with every()
-    // sort the toppings alphabetically with sort()
-    // sort the order totals from most expensive to least with .sort()
-    // Sort the prices with sort()
+    const isThereEnoughMeat = Object.values(meats).some(meatValue => meatValue >= 5);
+    console.log(isThereEnoughMeat);
 
+    // make sure we have at least 3 of every meat with every()
+    const isThereEnoughMeat1 = Object.values(meats).every(meatValue => meatValue >= 3);
+    console.log(isThereEnoughMeat1);
+    // sort the toppings alphabetically with sort()
+    console.log(toppings.sort())
+    // sort the order totals from most expensive to least with .sort()
+    function numberSort(a, b) {
+      return a - b;
+    }
+    console.log(orderTotals.sort(numberSort));
+
+    // Sort the prices with sort()
+    const productsByPrice = Object.entries(prices).sort(function(a, b){
+      const aPrice = a[1];
+      const bPrice = b[1];
+      return bPrice - aPrice;
+    });
+
+    console.table(Object.fromEntries(productsByPrice));
     /*
       Looping Methods (next)
     */

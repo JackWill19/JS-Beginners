@@ -11,7 +11,68 @@
 </head>
 
 <body>
+  <script>
+    const names = ['jack', 'james', 'garryn', 'joe']; 
+    console.log(names[1]);
+    console.log(names.length);
+    console.log(names[names.length - 1]);
 
+    names.push('josh');
+    console.log(names);
+
+    const names2 = [...names, 'josh'];
+    names.unshift('melvin');
+    console.log(names);
+    
+    const names3 = ['melvin', ...names];
+    console.log(names);
+
+    const bikes = ['bianchi', 'miele', 'panasonic', 'miyata'];
+
+    const newBikes = [
+      ...bikes.slice(0, 2),
+      'benotto',
+      ...bikes.slice(2)
+    ];
+
+    const newBikes2 = [
+      ...newBikes.slice(0, 3),
+      ...newBikes.slice(4)
+    ];
+
+    const comments = [
+      { text: 'Cool Beans', id: 123 },
+      { text: 'Love this', id: 133 },
+      { text: 'Neato', id: 233 },
+      { text: 'good bikes', id: 333 },
+      { text: 'so good', id: 433 },
+    ];
+
+    function deleteComment(id, comments) {
+      // first find the index of the item in the array
+      const commentIndex = comments.findIndex(comment => comment.id === id);
+      // make a new array without that item in it
+      return [
+        ...comments.slice(0, commentIndex),
+        ...comments.slice(commentIndex + 1),
+      ];
+      // return our new array
+    }
+
+    // const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9,];
+
+    // numbers.splice(3, 2);
+    // console.log(numbers);
+
+    // const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9,];
+    // console.log(numbers);
+
+    // const pizzaSlice = numbers.slice(2, 4);
+    // console.log(pizzaSlice);
+    // console.log(numbers);
+
+
+  </script>
 </body>
 
 </html>

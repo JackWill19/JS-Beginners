@@ -6,21 +6,19 @@ let items = [];
 
 function handleSubmit(e) {
     e.preventDefault();
-    const name = e.currentTarget.item.value;
-    //If empty dont submit
-    if(!name) return;
-    const item = {
-        name: name,
-        id: Date.now(),
+    const name = e.currentTarget.item.value; // Targeting the value of the input field
+    if(!name) return; //If empty dont submit
+    const item = { // Creating an item object
+        name: name, 
+        id: Date.now(), //Using date to set a unique ID
         complete: false,
     };
 
     // push items into state
-    items.push(item);
+    items.push(item); // Pushing item into empty items array
     console.log(`There are now ${items.length} in your state`);
 
-    //clear form
-    e.target.reset();
+    e.target.reset(); // Resetting the value in the input field
     
     // Custom event that tells you the item has been updated
     list.dispatchEvent(new CustomEvent('itemsUpdated')); //attatches a new event 'itemsUpdated' to the list class
@@ -28,27 +26,24 @@ function handleSubmit(e) {
 
 }
 
-function displayItems() {
+function displayItems() { // Creating a function to display items
     console.log(items);
-    const html = items
-    .map(item => `
+    const html = items //Mapping a html block over each individual item which will display their name, id, a checkbox and a delete button
+    .map(item => ` 
     <li class="shopping-item">
         <input value="${item.id}" type="checkbox" ${item.complete && 'checked'}>
         <span class="itemName">${item.name}</span>
-        <button aria-label="Remove ${item.name}" value="${item.id}">&times;</buttonaria-label="Remove>
+        <button aria-label="Remove ${item.name}" value="${item.id}">&times;</button aria-label="Remove">
     </li> `)
-    .join('');
-    list.innerHTML = html;
-    console.log(html);
+    .join(''); //Joining the mapped array to each item
+    list.innerHTML = html; // setting the inner html of the list div to the html passed above
 }
 
 function mirrorToLocalStorage(){
-    console.info('Saving to localstorage');
     localStorage.setItem('items', JSON.stringify(items)); // local storage only takes text so items needs to be converted to string
 }
 
 function restoreFromLocalStorage(){
-    console.info('Restoring from localstorage');
     const localItems = JSON.parse(localStorage.getItem('items')); // pulling items from local storage, parsing string into an object
     if (localItems.length){
         // items = localItems; // dump locally stored items back into the items arra
@@ -58,7 +53,6 @@ function restoreFromLocalStorage(){
 }
 
 function deleteItem(id) {
-    console.log('DELETING ITEM', id);
     //update items array without the selected item
     items = items.filter(item => item.id !== id); // using .filter to remove the selected item
     list.dispatchEvent(new CustomEvent('itemsUpdated')); //Updating local storage
@@ -67,8 +61,8 @@ function deleteItem(id) {
 
 
 function markCompleted(id){
-    const itemRef = items.find(item => item.id === id);
-    itemRef.complete = !itemRef.complete;
+    const itemRef = items.find(item => item.id === id); // Finding the list item by its ID
+    itemRef.complete = !itemRef.complete; // Checks if the item is there
     list.dispatchEvent(new CustomEvent('itemsUpdated'));
 }
 
